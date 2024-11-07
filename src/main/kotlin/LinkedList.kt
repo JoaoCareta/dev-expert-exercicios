@@ -25,6 +25,11 @@ class LinkedList<T>(private var value: T) {
         return linkedListSize <= 0
     }
 
+    fun clearLinkedList() {
+        this.linkedListHead = null
+        this.linkedListSize = 0
+    }
+
     private fun setEmptyLinkedListHeadAndTail(newNode: Node<T>) {
         this.linkedListHead = newNode
         this.linkedListTail = newNode

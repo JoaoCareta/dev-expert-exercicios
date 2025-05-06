@@ -74,13 +74,13 @@ class LinkedList<T>(private var value: T) {
         }
     }
 
-    fun removeElementAtBeginning(): Boolean {
+    private fun removeElementAtBeginning(): Boolean {
         linkedListHead = linkedListHead?.nextNode
         decrementLinkedListLength()
         return true
     }
 
-    fun removeElementAtEnd(): Boolean {
+    private fun removeElementAtEnd(): Boolean {
         val previousNode = getElementAtIndex(linkedListSize-1)
         linkedListTail = previousNode
         linkedListTail?.nextNode = null

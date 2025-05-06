@@ -917,4 +917,119 @@ fun deleteDuplicates(head: ListNode?): ListNode? {
     return head
 }
 
+fun findDuplicate(nums: IntArray): Int {
+    val numsSet = mutableSetOf<Int>()
+    for (i in nums) {
+        if (!numsSet.add(i)) return i
+    }
+    return -1
+}
+
+fun findDuplicateTwoPointers(nums: IntArray): Int {
+    var left = 0
+    val right = nums.size - 1
+
+    while (left < right) {
+        if (nums[left] == nums[right]) return nums[left]
+
+    }
+    return -1
+}
+
+fun moveZeroes(nums: IntArray): Unit {
+    var k = 0;
+    for(i in nums.indices) {
+        if(nums[i] != 0) {
+            nums[k] = nums[i]
+            k++
+        }
+    }
+
+    while(k < nums.size) {
+        nums[k] = 0
+        k++
+    }
+}
+
+fun reverseString(s: CharArray): Unit {
+    var left = 0
+    var right = s.size -1
+
+    while (left < right) {
+        val temp = s[left]
+        s[left] = s[right]
+        s[right] = temp
+        left++
+        right--
+    }
+}
+
+fun containsNearbyDuplicate(nums: IntArray, k: Int): Boolean {
+    if (k <= 0) return false
+    val numsSet = mutableSetOf<Int>()
+
+    for (i in nums.indices) {
+        if (i > k) {
+            numsSet.remove(nums[i - k - 1])
+        }
+        if (!numsSet.add(nums[i])) {
+            return true
+        }
+    }
+    return false
+}
+
+fun intersection(nums1: IntArray, nums2: IntArray): IntArray {
+    val resultMutableSet = mutableSetOf<Int>()
+    for (i in nums1) {
+        for (j in nums2) {
+            if (nums1.contains(j)) resultMutableSet.add(j)
+        }
+    }
+    return resultMutableSet.toIntArray()
+}
+
+fun minimumAverage(nums: IntArray): Double {
+    var leftPointer = 0
+    var rightPointer = nums.size-1
+    nums.sort()
+    var minAverage = Double.MAX_VALUE
+    while (leftPointer < rightPointer) {
+        val currentAverage: Double = (nums[leftPointer] + nums[rightPointer]).toDouble() / 2
+        minAverage = min(minAverage, currentAverage)
+        leftPointer++
+        rightPointer--
+    }
+    return minAverage
+}
+
+fun removeDuplicates(nums: IntArray): Int {
+    nums.distinct().let {
+        it.forEachIndexed { index, value ->
+            nums[index] = value
+        }
+        return it.size
+    }
+}
+
+fun countPairs(nums: List<Int>, target: Int): Int {
+    val sortedList = nums.sorted()
+    var leftPointer = 0
+    var rightPointer = sortedList.size - 1
+    var result = 0
+
+    while (leftPointer < rightPointer) {
+        val sum = sortedList[leftPointer] + sortedList[rightPointer]
+        if (sum < target) {
+            result += rightPointer - leftPointer
+            leftPointer++
+        } else {
+            rightPointer--
+        }
+    }
+
+    return result
+}
+
+
 
